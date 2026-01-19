@@ -1,8 +1,9 @@
 from lynx.forms import CreateUserForm
 from django.shortcuts import render, redirect
 
+from lynx.models import Profile
 
-# Create your views here.
+
 def index(request):
     return render(request, "lynx/index.html")
 
@@ -12,7 +13,9 @@ def register(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            current_user = form.save(commit=False)
             form.save()
+            Profile.objects.create(user=current_user)
             return redirect("my-login")
 
     context = {"form": form}
