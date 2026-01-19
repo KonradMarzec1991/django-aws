@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from lynx.forms import CreateUserForm
+from django.shortcuts import render, redirect
+
 
 # Create your views here.
 def index(request):
@@ -6,7 +8,15 @@ def index(request):
 
 
 def register(request):
-    return render(request, "lynx/register.html")
+    form = CreateUserForm()
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("my-login")
+
+    context = {"form": form}
+    return render(request, "lynx/register.html", context=context)
 
 
 def my_login(request):
