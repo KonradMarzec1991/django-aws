@@ -7,7 +7,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Dashboard</h1>
+    <div class="container bg-white shadow-md p-5 form-layout">
+        <h1>Dashboard</h1>
+        <hr>
+        <a href="{% url 'user-logout' %}">Logout</a>
+    </div>
 </body>
 <script src="{% static 'js/app.js' %}"></script>
 </html>
