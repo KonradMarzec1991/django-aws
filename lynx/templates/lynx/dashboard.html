@@ -1,4 +1,6 @@
 {% load static %}
+{% load crispy_forms_tags %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +13,9 @@
         <h1>Dashboard</h1>
         <hr>
         <a href="{% url 'user-logout' %}">Logout</a>
+        <br />
+        <br />
+        <a href="{% url 'profile-management' %}">Profile management</a>
     </div>
 </body>
 <script src="{% static 'js/app.js' %}"></script>

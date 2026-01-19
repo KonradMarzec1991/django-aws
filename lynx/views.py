@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
 
-from lynx.forms import CreateUserForm, LoginUserForm
+from lynx.forms import CreateUserForm, LoginUserForm, UpdateUserForm
 from django.shortcuts import render, redirect
 
 from lynx.models import Profile
@@ -49,7 +49,15 @@ def dashboard(request):
 
 @login_required(login_url="my-login")
 def profile_management(request):
-    return render(request, "lynx/profile-management.html")
+    user_form = UpdateUserForm(instance=request.user)
+    if request.method == "POST":
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect("dashboard")
+
+    context = {"user_form": user_form}
+    return render(request, "lynx/profile-management.html", context=context)
 
 
 def user_logout(request):
