@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import auth
+from django.contrib.auth.models import auth, User
 
 from lynx.forms import CreateUserForm, LoginUserForm, UpdateUserForm
 from django.shortcuts import render, redirect
@@ -44,7 +44,9 @@ def my_login(request):
 
 @login_required(login_url="my-login")
 def dashboard(request):
-    return render(request, "lynx/dashboard.html")
+    profile = Profile.objects.get(user=request.user)
+    context = {"profile": profile}
+    return render(request, "lynx/dashboard.html", context=context)
 
 
 @login_required(login_url="my-login")
@@ -63,3 +65,12 @@ def profile_management(request):
 def user_logout(request):
     auth.logout(request)
     return redirect("")
+
+
+@login_required(login_url="my-login")
+def delete_account(request):
+    if request.method == "POST":
+        User.objects.filter(id=request.user.id).delete()
+        return redirect("")
+
+    return render(request, "lynx/delete_account.html")
