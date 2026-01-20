@@ -20,6 +20,15 @@
     </div>
     <br>
     <div class="container bg-white shadow-md p-5 form-layout">
+        <h3>Upload your profile picture</h3>
+        <form method="POST" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ profile_form.profile_pic|as_crispy_field }}
+            <input class="btn btn-primary" type="submit" value="Submit" />
+        </form>
+    </div>
+    <br>
+    <div class="container bg-white shadow-md p-5 form-layout">
         <h3> Account deletion </h3>
         <br>
         <a href="{% url 'delete-account' %}"> Delete account </a>

@@ -12,6 +12,10 @@
     <div class="container bg-white shadow-md p-5 form-layout">
         <h1>Dashboard</h1>
         <hr>
+        Welcome, {{ user }}!
+        <br><br>
+        <img style="width: 100px;" src="{{ profile.profile_pic.url }}" alt="">
+        <br><br>
         <a href="{% url 'user-logout' %}">Logout</a>
         <br />
         <br />
