@@ -1,0 +1,31 @@
+{
+  "name": "DemoAppContainer",
+  "image": "622711946516.dkr.ecr.us-east-1.amazonaws.com/edenthought@sha256:1e08a9167aec97d58c9fee96670db41a62c4619f3b4f7d0ea143c7b74d474684",
+  "cpu": 0,
+  "portMappings": [
+    {
+      "name": "demoappcontainer",
+      "containerPort": 8000,
+      "hostPort": 8000,
+      "protocol": "tcp",
+      "appProtocol": "http"
+    }
+  ],
+  "essential": true,
+  "environment": [],
+  "environmentFiles": [],
+  "mountPoints": [],
+  "volumesFrom": [],
+  "ulimits": [],
+  "logConfiguration": {
+    "logDriver": "awslogs",
+    "options": {
+      "awslogs-group": "/ecs/DemoAppTaskDefinition",
+      "awslogs-create-group": "true",
+      "awslogs-region": "us-east-1",
+      "awslogs-stream-prefix": "ecs"
+    },
+    "secretOptions": []
+  },
+  "systemControls": []
+}
